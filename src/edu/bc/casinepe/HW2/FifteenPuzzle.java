@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 
 public class FifteenPuzzle extends Activity {
@@ -17,7 +18,38 @@ public class FifteenPuzzle extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fifteen_puzzle);
+		randomizeNumbers();
+	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.fifteen_puzzle, menu);
+		return true;
+	}
+	
+	/*public char canMove(Button from) {
+		return 'N';
+	}*/
+	
+	public void buttonClicked(View view) {
+		int buttonId = view.getId();
+		Button btn = (Button)view.findViewById(buttonId);
+
+		if (buttonId == R.id.randomizeButton) {
+			Log.d(""+this.getClass(), "Random button is: " + buttonId);
+			randomizeNumbers();
+		} else {
+			Log.d(""+this.getClass(), "Button is: " + buttonId);
+		}
+	}
+	
+	/*
+	 * @param
+	 * @return Randomly fills the view's buttons with numbers from 1-15 and one empty slot
+	 */
+	public void randomizeNumbers() {
+		
 		List<Integer> availableNumbers = new LinkedList<Integer>();
 		for (int i = 0; i <= 15; i++) {
 			availableNumbers.add(i);
@@ -46,19 +78,7 @@ public class FifteenPuzzle extends Activity {
 			}
 		}
 		
-		Log.d(""+this.getClass(), "Finished filling array");
-
+		Log.d(""+this.getClass(), "Finished randomizing array");
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.fifteen_puzzle, menu);
-		return true;
-	}
-	
-	/*public char canMove(Button from) {
-		return 'N';
-	}*/
 
 }
