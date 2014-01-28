@@ -16,6 +16,7 @@ public class FifteenPuzzle extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_fifteen_puzzle);
 
 		List<Integer> availableNumbers = new LinkedList<Integer>();
 		for (int i = 0; i <= 15; i++) {
@@ -23,37 +24,29 @@ public class FifteenPuzzle extends Activity {
 		}
 		
 		Random r = new Random();
+		int count = 0x0;
 		for (int i = 0; i < puzzle.length; i++) {
 			for (int j = 0; j < puzzle[0].length; j++) {
+				//Choose a random number within the range of availableNumber's indices
 				int num = r.nextInt(availableNumbers.size());
+				//Set the puzzle array's value
 				puzzle[i][j] = availableNumbers.get(num);
+				//Remove value from availableNumbers so the same number cannot be chosen twice
 				availableNumbers.remove(num);
+
+				//Set button in view
+				Button btn = (Button)findViewById(R.id.button0 + count);
+				if (puzzle[i][j] == 0) {
+					btn.setText(" ");
+				} else {
+					btn.setText(""+puzzle[i][j]);	
+				}
+				//Increment counter so the next button is chosen
+				count += 0x1;
 			}
 		}
 		
 		Log.d(""+this.getClass(), "Finished filling array");
-		/*
-		Button btn00 = (Button)this.findViewById(R.id.button00);
-		Button btn01 = (Button)this.findViewById(R.id.button01);
-		Button btn02 = (Button)this.findViewById(R.id.button02);
-		Button btn03 = (Button)this.findViewById(R.id.button03);
-		Button btn10 = (Button)this.findViewById(R.id.button10);
-		Button btn11 = (Button)this.findViewById(R.id.button11);
-		Button btn12 = (Button)this.findViewById(R.id.button12);
-		Button btn13 = (Button)this.findViewById(R.id.button13);
-		Button btn20 = (Button)this.findViewById(R.id.button20);
-		Button btn21 = (Button)this.findViewById(R.id.button21);
-		Button btn22 = (Button)this.findViewById(R.id.button22);
-		Button btn23 = (Button)this.findViewById(R.id.button23);
-		Button btn30 = (Button)this.findViewById(R.id.button30);
-		Button btn31 = (Button)this.findViewById(R.id.button31);
-		Button btn32 = (Button)this.findViewById(R.id.button32);
-		Button btn33 = (Button)this.findViewById(R.id.button33);*/
-
-
-
-		
-		setContentView(R.layout.activity_fifteen_puzzle);
 
 	}
 
